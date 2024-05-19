@@ -7,17 +7,11 @@ contract DateHandler{
     uint256 lastDateClaimed = block.timestamp;
 
     function claimDate() public {
-        uint256 currentDay = getCurrentDate();
+        uint256 currentDay = block.timestamp / 86400; // (60*60*24);
         require(currentDay != lastDateClaimed, "Date has already been claimed today");
         lastDateClaimed = currentDay;
         ownerAddrToDay[msg.sender].push(currentDay);
     }
-
-    function getCurrentDate() public view returns (uint256) {
-        uint256 day = block.timestamp / 86400; // (60*60*24)
-        return day;
-    }
-
 
     function getDatesOwned() public view returns (uint256[] memory) {
         return ownerAddrToDay[msg.sender];

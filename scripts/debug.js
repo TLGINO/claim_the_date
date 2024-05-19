@@ -1,9 +1,10 @@
 async function main() {
   let contract = await ethers.deployContract("Auction");
   await contract.claimDate();
-  await contract.claimDate();
+  let datesOwned = await contract.getDatesOwned();
+  console.log(datesOwned);
 
-  //   console.log("HERE", result);
+  await contract.sellDate(datesOwned[0], 1);
 }
 
 main().catch((error) => {
