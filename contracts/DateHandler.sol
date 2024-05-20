@@ -8,7 +8,7 @@ contract DateHandler{
 
     function claimDate() public {
         uint256 currentDay = block.timestamp / 86400; // (60*60*24);
-        require(currentDay != lastDateClaimed, "Date has already been claimed today");
+        require(currentDay != lastDateClaimed, "Someone has already claimed today's date.");
         lastDateClaimed = currentDay;
         ownerAddrToDay[msg.sender].push(currentDay);
     }
